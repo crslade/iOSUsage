@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedFile: URL? = nil
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Open File") {
+                let panel = NSOpenPanel()
+                panel.allowsMultipleSelection = false
+                panel.canChooseDirectories = false
+                if panel.runModal() == .OK {
+                    let url = panel.url
+                    print(url!)
+                }
+            }
         }
         .padding()
     }
