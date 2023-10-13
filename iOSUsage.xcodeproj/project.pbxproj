@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6332AD8A8DE00F09FA6 /* iOSUsageApp.swift */; };
-		544FD6362AD8A8DE00F09FA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6352AD8A8DE00F09FA6 /* ContentView.swift */; };
+		544FD6362AD8A8DE00F09FA6 /* iOSUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */; };
 		544FD6382AD8A8DF00F09FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 544FD6372AD8A8DF00F09FA6 /* Assets.xcassets */; };
 		544FD63B2AD8A8DF00F09FA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 544FD63A2AD8A8DF00F09FA6 /* Preview Assets.xcassets */; };
 		544FD6462AD8A8DF00F09FA6 /* iOSUsageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6452AD8A8DF00F09FA6 /* iOSUsageTests.swift */; };
 		544FD6502AD8A8DF00F09FA6 /* iOSUsageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD64F2AD8A8DF00F09FA6 /* iOSUsageUITests.swift */; };
 		544FD6522AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */; };
+		54EEAB692AD8CD370030152E /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 54EEAB682AD8CD370030152E /* SQLite */; };
+		54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEAB6B2AD8CDC80030152E /* UsageReader.swift */; };
+		54EEAB702AD8E3DD0030152E /* UsageReaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEAB6F2AD8E3DD0030152E /* UsageReaderManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,7 @@
 /* Begin PBXFileReference section */
 		544FD6302AD8A8DE00F09FA6 /* iOSUsage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSUsage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		544FD6332AD8A8DE00F09FA6 /* iOSUsageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageApp.swift; sourceTree = "<group>"; };
-		544FD6352AD8A8DE00F09FA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageView.swift; sourceTree = "<group>"; };
 		544FD6372AD8A8DF00F09FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		544FD63A2AD8A8DF00F09FA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		544FD63C2AD8A8DF00F09FA6 /* iOSUsage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSUsage.entitlements; sourceTree = "<group>"; };
@@ -45,6 +48,8 @@
 		544FD64B2AD8A8DF00F09FA6 /* iOSUsageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSUsageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		544FD64F2AD8A8DF00F09FA6 /* iOSUsageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITests.swift; sourceTree = "<group>"; };
 		544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		54EEAB6B2AD8CDC80030152E /* UsageReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReader.swift; sourceTree = "<group>"; };
+		54EEAB6F2AD8E3DD0030152E /* UsageReaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReaderManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54EEAB692AD8CD370030152E /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,10 +102,12 @@
 			isa = PBXGroup;
 			children = (
 				544FD6332AD8A8DE00F09FA6 /* iOSUsageApp.swift */,
-				544FD6352AD8A8DE00F09FA6 /* ContentView.swift */,
+				544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */,
 				544FD6372AD8A8DF00F09FA6 /* Assets.xcassets */,
 				544FD63C2AD8A8DF00F09FA6 /* iOSUsage.entitlements */,
 				544FD6392AD8A8DF00F09FA6 /* Preview Content */,
+				54EEAB6B2AD8CDC80030152E /* UsageReader.swift */,
+				54EEAB6F2AD8E3DD0030152E /* UsageReaderManager.swift */,
 			);
 			path = iOSUsage;
 			sourceTree = "<group>";
@@ -145,6 +153,9 @@
 			dependencies = (
 			);
 			name = iOSUsage;
+			packageProductDependencies = (
+				54EEAB682AD8CD370030152E /* SQLite */,
+			);
 			productName = iOSUsage;
 			productReference = 544FD6302AD8A8DE00F09FA6 /* iOSUsage.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +228,9 @@
 				Base,
 			);
 			mainGroup = 544FD6272AD8A8DE00F09FA6;
+			packageReferences = (
+				54EEAB672AD8CD370030152E /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
 			productRefGroup = 544FD6312AD8A8DE00F09FA6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -259,8 +273,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				544FD6362AD8A8DE00F09FA6 /* ContentView.swift in Sources */,
+				544FD6362AD8A8DE00F09FA6 /* iOSUsageView.swift in Sources */,
 				544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */,
+				54EEAB702AD8E3DD0030152E /* UsageReaderManager.swift in Sources */,
+				54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +445,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -456,6 +473,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -581,6 +599,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		54EEAB672AD8CD370030152E /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54EEAB682AD8CD370030152E /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54EEAB672AD8CD370030152E /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 544FD6282AD8A8DE00F09FA6 /* Project object */;
 }
