@@ -16,7 +16,7 @@
 		544FD6522AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */; };
 		54EEAB692AD8CD370030152E /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 54EEAB682AD8CD370030152E /* SQLite */; };
 		54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEAB6B2AD8CDC80030152E /* UsageReader.swift */; };
-		54EEAB702AD8E3DD0030152E /* UsageReaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEAB6F2AD8E3DD0030152E /* UsageReaderManager.swift */; };
+		54F31F662ADF4AF100A53F5C /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F31F652ADF4AF100A53F5C /* Usage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,7 @@
 		544FD64F2AD8A8DF00F09FA6 /* iOSUsageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITests.swift; sourceTree = "<group>"; };
 		544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		54EEAB6B2AD8CDC80030152E /* UsageReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReader.swift; sourceTree = "<group>"; };
-		54EEAB6F2AD8E3DD0030152E /* UsageReaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReaderManager.swift; sourceTree = "<group>"; };
+		54F31F652ADF4AF100A53F5C /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +107,7 @@
 				544FD63C2AD8A8DF00F09FA6 /* iOSUsage.entitlements */,
 				544FD6392AD8A8DF00F09FA6 /* Preview Content */,
 				54EEAB6B2AD8CDC80030152E /* UsageReader.swift */,
-				54EEAB6F2AD8E3DD0030152E /* UsageReaderManager.swift */,
+				54F31F652ADF4AF100A53F5C /* Usage.swift */,
 			);
 			path = iOSUsage;
 			sourceTree = "<group>";
@@ -274,8 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				544FD6362AD8A8DE00F09FA6 /* iOSUsageView.swift in Sources */,
+				54F31F662ADF4AF100A53F5C /* Usage.swift in Sources */,
 				544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */,
-				54EEAB702AD8E3DD0030152E /* UsageReaderManager.swift in Sources */,
 				54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

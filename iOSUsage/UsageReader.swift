@@ -7,13 +7,24 @@
 
 import Foundation
 import SQLite
+import SwiftData
 
-struct UsageReader {
+actor UsageReader: ModelActor {
 
-    private(set) var data: [Any]?
-    private(set) var devices: Set<String>?
+    let modelContainer: ModelContainer
+    let modelExecutor: any ModelExecutor
     
-    mutating func readData(folderURL: URL) async throws {
+    init(modelContainer: ModelContainer) {
+        self.modelContainer = modelContainer
+        let context = ModelContext(modelContainer)
+        modelExecutor = DefaultSerialModelExecutor(modelContext: context)
+        //Date Formatter Init
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current
+    }
+    
+    func readData(folderURL: URL) async throws {
+        try await clearData()
         let dbURL = folderURL.appendingPathComponent("KnowledgeC").appendingPathExtension("db")
         let db = try Connection(dbURL.path)
         print("Connection made")
@@ -45,14 +56,37 @@ struct UsageReader {
             ZSTARTDATE DESC
         """
         
-        devices = Set<String>()
+
         
         for row in try db.prepare(query) {
-            //print(row)
-            if let deviceId = row[6] as? String {
-                print(deviceId)
-                devices!.insert(deviceId)
+            if let appName = row[0] as? String{
+                let deviceId = row[6] as? String
+                var totalTime: Int? = nil
+                if let totalTime64 = row[1] as? Int64 {
+                    totalTime = Int(totalTime64)
+                }
+                let startTime = dateFromString(dateStr: row[2] as? String)
+                let endTime = dateFromString(dateStr: row[3] as? String)
+                let newUsage = Usage(startTime: startTime, endTime: endTime, totalTime: totalTime, appName: appName, device: deviceId)
+                modelContext.insert(newUsage)
             }
+        }
+        //try modelContext.save()
+    }
+    
+    func clearData() async throws {
+        try modelContext.delete(model: Usage.self)
+    }
+    
+    //MARK: - Date Converter
+    
+    private let dateFormatter = DateFormatter()
+    
+    private func dateFromString(dateStr: String?) -> Date? {
+        if dateStr != nil {
+            return dateFormatter.date(from: dateStr!)
+        } else {
+            return nil
         }
     }
     
