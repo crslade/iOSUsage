@@ -74,6 +74,28 @@ struct iOSUsageView: View {
                             Text(device)
                         }
                     }
+                    Button("Test Load") {
+                        Task {
+                            let storeManager = SecureStoreManager()
+                            do {
+                                try await storeManager.deleteSecret()
+                                try await storeManager.store(clientId: "testID", secret: "testSecret")
+                            } catch {
+                                print("Error: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+                    Button("Test retrieve") {
+                        Task {
+                            let storeManager = SecureStoreManager()
+                            do {
+                                let results = try await storeManager.retriveSecret()
+                                print(results)
+                            } catch {
+                                print("Error: \(error.localizedDescription)")
+                            }
+                        }
+                    }
                 }
             }
             Divider()

@@ -17,6 +17,7 @@
 		54EEAB692AD8CD370030152E /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 54EEAB682AD8CD370030152E /* SQLite */; };
 		54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEAB6B2AD8CDC80030152E /* UsageReader.swift */; };
 		54F31F662ADF4AF100A53F5C /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F31F652ADF4AF100A53F5C /* Usage.swift */; };
+		54F31F682ADF709900A53F5C /* SecureStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F31F672ADF709900A53F5C /* SecureStoreManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		54EEAB6B2AD8CDC80030152E /* UsageReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReader.swift; sourceTree = "<group>"; };
 		54F31F652ADF4AF100A53F5C /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
+		54F31F672ADF709900A53F5C /* SecureStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				544FD6392AD8A8DF00F09FA6 /* Preview Content */,
 				54EEAB6B2AD8CDC80030152E /* UsageReader.swift */,
 				54F31F652ADF4AF100A53F5C /* Usage.swift */,
+				54F31F672ADF709900A53F5C /* SecureStoreManager.swift */,
 			);
 			path = iOSUsage;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				544FD6362AD8A8DE00F09FA6 /* iOSUsageView.swift in Sources */,
+				54F31F682ADF709900A53F5C /* SecureStoreManager.swift in Sources */,
 				54F31F662ADF4AF100A53F5C /* Usage.swift in Sources */,
 				544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */,
 				54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */,
