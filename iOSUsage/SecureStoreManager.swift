@@ -21,7 +21,17 @@ actor SecureStoreManager {
         ]
     }
     
-    func store(dbName: String, clientId: String, secret: String) throws {
+    func readAndStore(fileName: URL) async throws -> (dbName: String, clientID: String, secret: String){
+        let credentials = try String(contentsOf: fileName, encoding: .utf8).split(separator: /,/)
+        guard credentials.count == 3 else {
+            throw KeychainError.unexpectedPasswordData
+        }
+        try delete()
+        try store(dbName: String(credentials[0]), clientId: String(credentials[1]), secret: String(credentials[2]))
+        return (String(credentials[0]), String(credentials[1]), String(credentials[2]))
+    }
+    
+    private func store(dbName: String, clientId: String, secret: String) throws {
         let secretData = secret.data(using: .utf8)!
         
         let query: [String: Any] = [

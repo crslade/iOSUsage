@@ -13,17 +13,30 @@ struct UploadView: View {
     @Query private var usages: [Usage]
     var selectedDevice: String
     
-    @State private var credentialsLoaded = false
+    private var credentialsLoaded: Bool { dbName != nil }
     @State private var selectedFile: URL? = nil
+    
+    @State private var dbName: String? = nil
+    @State private var clientId: String? = nil
+    @State private var dbSecret: String? = nil
     
     var body: some View {
         VStack {
-            Text("Credentials:")
+            Text("Upload Database:")
                 .font(.title)
             if credentialsLoaded {
-                Text("Loaded")
+                Text(dbName!)
+                Button("Clear Credentials") {
+                    Task {
+                        do {
+                            try await clearCredentials()
+                        } catch {
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    }
+                }
             } else {
-                Button("Select File") {
+                Button("Select Credential File") {
                     let panel = NSOpenPanel()
                     panel.allowsMultipleSelection = false
                     panel.canChooseDirectories = false
@@ -34,7 +47,8 @@ struct UploadView: View {
                         if selectedFile != nil {
                             Task {
                                 do {
-                                    try await loadCredentials()
+                                    try await readCredentials()
+                                    print("Selected Device: \(selectedDevice)")
                                 } catch {
                                     print("Error: \(error.localizedDescription)")
                                 }
@@ -44,20 +58,44 @@ struct UploadView: View {
                     }
                 }
             }
+        }.onAppear {
+            Task {
+                do {
+                    try await loadCredentials()
+                } catch {
+                    print("Error Loading Credentiasls: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    private func readCredentials() async throws {
+        if let fileURL = selectedFile {
+            let storeManager = SecureStoreManager()
+            let credentials = try await storeManager.readAndStore(fileName: fileURL)
+            dbName = credentials.dbName
+            clientId = credentials.clientID
+            dbSecret = credentials.secret
         }
     }
     
     private func loadCredentials() async throws {
         let storeManager = SecureStoreManager()
-        try await storeManager.delete()
-        print("Deleted")
-        try await storeManager.store(dbName: "TestDB", clientId: "clientID", secret: "secret123")
-        print("Stored")
-        if let stored = try await storeManager.retrive() {
-            print("DBName: \(stored.dbName) Client: \(stored.clientID) Secret:  \(stored.secret)")
+        if let credentials = try await storeManager.retrive() {
+            dbName = credentials.dbName
+            clientId = credentials.clientID
+            dbSecret = credentials.secret
         } else {
             print("No credentials found")
         }
+    }
+    
+    private func clearCredentials() async throws {
+        let storeManager = SecureStoreManager()
+        try await storeManager.delete()
+        dbName = nil
+        clientId = nil
+        dbSecret = nil
     }
 }
 
