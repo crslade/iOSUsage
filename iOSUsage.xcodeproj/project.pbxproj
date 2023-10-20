@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		543C77872AE2016E00ED11E0 /* ScreenTimeUsagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543C77862AE2016E00ED11E0 /* ScreenTimeUsagesView.swift */; };
+		543C77892AE2026700ED11E0 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543C77882AE2026700ED11E0 /* UploadView.swift */; };
+		543C778B2AE208D700ED11E0 /* ReadDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543C778A2AE208D700ED11E0 /* ReadDataView.swift */; };
+		543C778D2AE2091400ED11E0 /* SelectDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543C778C2AE2091400ED11E0 /* SelectDeviceView.swift */; };
 		544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6332AD8A8DE00F09FA6 /* iOSUsageApp.swift */; };
 		544FD6362AD8A8DE00F09FA6 /* iOSUsageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */; };
 		544FD6382AD8A8DF00F09FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 544FD6372AD8A8DF00F09FA6 /* Assets.xcassets */; };
@@ -38,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		543C77862AE2016E00ED11E0 /* ScreenTimeUsagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenTimeUsagesView.swift; sourceTree = "<group>"; };
+		543C77882AE2026700ED11E0 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
+		543C778A2AE208D700ED11E0 /* ReadDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDataView.swift; sourceTree = "<group>"; };
+		543C778C2AE2091400ED11E0 /* SelectDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDeviceView.swift; sourceTree = "<group>"; };
 		544FD6302AD8A8DE00F09FA6 /* iOSUsage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSUsage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		544FD6332AD8A8DE00F09FA6 /* iOSUsageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageApp.swift; sourceTree = "<group>"; };
 		544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageView.swift; sourceTree = "<group>"; };
@@ -80,6 +88,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		543C77852AE1FFE600ED11E0 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */,
+				543C778C2AE2091400ED11E0 /* SelectDeviceView.swift */,
+				543C77862AE2016E00ED11E0 /* ScreenTimeUsagesView.swift */,
+				543C77882AE2026700ED11E0 /* UploadView.swift */,
+				543C778A2AE208D700ED11E0 /* ReadDataView.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
 		544FD6272AD8A8DE00F09FA6 = {
 			isa = PBXGroup;
 			children = (
@@ -103,8 +123,8 @@
 		544FD6322AD8A8DE00F09FA6 /* iOSUsage */ = {
 			isa = PBXGroup;
 			children = (
+				543C77852AE1FFE600ED11E0 /* MainViews */,
 				544FD6332AD8A8DE00F09FA6 /* iOSUsageApp.swift */,
-				544FD6352AD8A8DE00F09FA6 /* iOSUsageView.swift */,
 				544FD6372AD8A8DF00F09FA6 /* Assets.xcassets */,
 				544FD63C2AD8A8DF00F09FA6 /* iOSUsage.entitlements */,
 				544FD6392AD8A8DF00F09FA6 /* Preview Content */,
@@ -277,9 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				544FD6362AD8A8DE00F09FA6 /* iOSUsageView.swift in Sources */,
+				543C778D2AE2091400ED11E0 /* SelectDeviceView.swift in Sources */,
 				54F31F682ADF709900A53F5C /* SecureStoreManager.swift in Sources */,
 				54F31F662ADF4AF100A53F5C /* Usage.swift in Sources */,
+				543C77872AE2016E00ED11E0 /* ScreenTimeUsagesView.swift in Sources */,
+				543C77892AE2026700ED11E0 /* UploadView.swift in Sources */,
 				544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */,
+				543C778B2AE208D700ED11E0 /* ReadDataView.swift in Sources */,
 				54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
