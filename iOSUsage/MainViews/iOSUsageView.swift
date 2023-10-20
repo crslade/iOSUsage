@@ -26,7 +26,7 @@ struct iOSUsageView: View {
             HStack(alignment: .top) {
                 ScreenTimeUsageView(selectedDevice: selectedDevice)
                 Divider()
-                UploadView()
+                UploadView(selectedDevice: selectedDevice)
             }
             .layoutPriority(1)
         }

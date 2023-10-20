@@ -21,46 +21,44 @@ actor SecureStoreManager {
         ]
     }
     
-    func store(clientId: String, secret: String) throws {
+    func store(dbName: String, clientId: String, secret: String) throws {
         let secretData = secret.data(using: .utf8)!
         
         let query: [String: Any] = [
             kSecClass as String: kSecClassInternetPassword,
             kSecAttrAccount as String: clientId,
             kSecValueData as String: secretData,
-            kSecAttrServer as String: KeyConstants.server
+            kSecAttrServer as String: KeyConstants.server,
+            kSecAttrLabel as String: dbName
         ]
         let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecSuccess else {
-            print(SecCopyErrorMessageString(status, nil) ?? "swd")
             throw KeychainError.unhandledError(status: status)
         }
     }
     
-    func retriveSecret() throws -> (clientID: String, secret: String) {
+    func retrive() throws -> (dbName: String, clientID: String, secret: String)? {
         let query = KeyConstants.searchQuery
         
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
-        guard status != errSecItemNotFound else {
-            print(SecCopyErrorMessageString(status, nil) ?? "swd2")
-            throw KeychainError.noPassword
+        if status == errSecItemNotFound {
+            return nil
         }
         guard status == errSecSuccess else {
-            print(SecCopyErrorMessageString(status, nil) ?? "swd3")
             throw KeychainError.unhandledError(status: status)
         }
         guard let exisitingItem = item as? [String: Any],
               let secretData = exisitingItem[kSecValueData as String] as? Data,
               let secret = String(data: secretData, encoding: .utf8),
-              let clientId = exisitingItem[kSecAttrAccount as String] as? String else {
-            print(SecCopyErrorMessageString(status, nil) ?? "swd4")
+              let clientId = exisitingItem[kSecAttrAccount as String] as? String,
+              let dbName = exisitingItem[kSecAttrLabel as String] as? String else {
             throw KeychainError.unexpectedPasswordData
         }
-        return (clientId, secret)
+        return (dbName, clientId, secret)
     }
     
-    func deleteSecret() throws {
+    func delete() throws {
         let query = KeyConstants.searchQuery
         let status = SecItemDelete(query as CFDictionary)
         guard status == errSecSuccess || status == errSecItemNotFound else {
