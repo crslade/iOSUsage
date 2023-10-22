@@ -18,6 +18,9 @@
 		544FD6462AD8A8DF00F09FA6 /* iOSUsageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6452AD8A8DF00F09FA6 /* iOSUsageTests.swift */; };
 		544FD6502AD8A8DF00F09FA6 /* iOSUsageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD64F2AD8A8DF00F09FA6 /* iOSUsageUITests.swift */; };
 		544FD6522AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */; };
+		54EBC5AB2AE36B7A00EAF4C4 /* AWSAmplify in Frameworks */ = {isa = PBXBuildFile; productRef = 54EBC5AA2AE36B7A00EAF4C4 /* AWSAmplify */; };
+		54EBC5AD2AE36B7A00EAF4C4 /* AWSDynamoDB in Frameworks */ = {isa = PBXBuildFile; productRef = 54EBC5AC2AE36B7A00EAF4C4 /* AWSDynamoDB */; };
+		54EBC5AF2AE36CAE00EAF4C4 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EBC5AE2AE36CAE00EAF4C4 /* UploadManager.swift */; };
 		54EEAB692AD8CD370030152E /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 54EEAB682AD8CD370030152E /* SQLite */; };
 		54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EEAB6B2AD8CDC80030152E /* UsageReader.swift */; };
 		54F31F662ADF4AF100A53F5C /* Usage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F31F652ADF4AF100A53F5C /* Usage.swift */; };
@@ -57,6 +60,7 @@
 		544FD64B2AD8A8DF00F09FA6 /* iOSUsageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSUsageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		544FD64F2AD8A8DF00F09FA6 /* iOSUsageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITests.swift; sourceTree = "<group>"; };
 		544FD6512AD8A8DF00F09FA6 /* iOSUsageUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSUsageUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		54EBC5AE2AE36CAE00EAF4C4 /* UploadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		54EEAB6B2AD8CDC80030152E /* UsageReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageReader.swift; sourceTree = "<group>"; };
 		54F31F652ADF4AF100A53F5C /* Usage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usage.swift; sourceTree = "<group>"; };
 		54F31F672ADF709900A53F5C /* SecureStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreManager.swift; sourceTree = "<group>"; };
@@ -68,6 +72,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				54EEAB692AD8CD370030152E /* SQLite in Frameworks */,
+				54EBC5AD2AE36B7A00EAF4C4 /* AWSDynamoDB in Frameworks */,
+				54EBC5AB2AE36B7A00EAF4C4 /* AWSAmplify in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +137,7 @@
 				54EEAB6B2AD8CDC80030152E /* UsageReader.swift */,
 				54F31F652ADF4AF100A53F5C /* Usage.swift */,
 				54F31F672ADF709900A53F5C /* SecureStoreManager.swift */,
+				54EBC5AE2AE36CAE00EAF4C4 /* UploadManager.swift */,
 			);
 			path = iOSUsage;
 			sourceTree = "<group>";
@@ -178,6 +185,8 @@
 			name = iOSUsage;
 			packageProductDependencies = (
 				54EEAB682AD8CD370030152E /* SQLite */,
+				54EBC5AA2AE36B7A00EAF4C4 /* AWSAmplify */,
+				54EBC5AC2AE36B7A00EAF4C4 /* AWSDynamoDB */,
 			);
 			productName = iOSUsage;
 			productReference = 544FD6302AD8A8DE00F09FA6 /* iOSUsage.app */;
@@ -253,6 +262,7 @@
 			mainGroup = 544FD6272AD8A8DE00F09FA6;
 			packageReferences = (
 				54EEAB672AD8CD370030152E /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				54EBC5A92AE36B7A00EAF4C4 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
 			);
 			productRefGroup = 544FD6312AD8A8DE00F09FA6 /* Products */;
 			projectDirPath = "";
@@ -304,6 +314,7 @@
 				543C77892AE2026700ED11E0 /* UploadView.swift in Sources */,
 				544FD6342AD8A8DE00F09FA6 /* iOSUsageApp.swift in Sources */,
 				543C778B2AE208D700ED11E0 /* ReadDataView.swift in Sources */,
+				54EBC5AF2AE36CAE00EAF4C4 /* UploadManager.swift in Sources */,
 				54EEAB6C2AD8CDC80030152E /* UsageReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -629,6 +640,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		54EBC5A92AE36B7A00EAF4C4 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/awslabs/aws-sdk-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.28.0;
+			};
+		};
 		54EEAB672AD8CD370030152E /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
@@ -640,6 +659,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		54EBC5AA2AE36B7A00EAF4C4 /* AWSAmplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54EBC5A92AE36B7A00EAF4C4 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSAmplify;
+		};
+		54EBC5AC2AE36B7A00EAF4C4 /* AWSDynamoDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54EBC5A92AE36B7A00EAF4C4 /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = AWSDynamoDB;
+		};
 		54EEAB682AD8CD370030152E /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 54EEAB672AD8CD370030152E /* XCRemoteSwiftPackageReference "SQLite.swift" */;
