@@ -10,33 +10,49 @@ import SwiftData
 
 struct UploadView: View {
     @Environment(\.modelContext) var context
+    @AppStorage(UploadManager.DefaultsKeys.uploadURIKey) var uploadURI: String?
+    @AppStorage(UploadManager.DefaultsKeys.participantIDKey) var participantID: String?
     @Query private var usages: [Usage]
     var selectedDevice: String
     
-    private var credentialsLoaded: Bool { dbName != nil }
+    private var credentialsLoaded: Bool { uploadURI != nil }
     @State private var selectedFile: URL? = nil
     
-    @State private var dbName: String? = nil
-    @State private var clientId: String? = nil
-    @State private var dbSecret: String? = nil
+    var participantBinding: Binding<String> {
+            Binding<String>(
+                get: {
+                    return self.participantID ?? ""
+            },
+                set: { newString in
+                    self.participantID = newString
+            })
+        }
+
     
     var body: some View {
         VStack {
             Text("Upload Database:")
                 .font(.title)
-            if credentialsLoaded {
-                Text(dbName!)
-                Button("Clear Credentials") {
-                    Task {
-                        do {
-                            try await clearCredentials()
-                        } catch {
-                            print("Error: \(error.localizedDescription)")
-                        }
+            if uploadURI != nil {
+                Text("Upload Destination Set")
+                VStack(alignment: .leading) {
+                    Text("ParticipantID:")
+                    TextField("ParticipantID", text: participantBinding)
+                        .textFieldStyle(.roundedBorder)
+                        .layoutPriority(0.5)
+                }
+                Button("Upload Data") {
+                    if participantID != nil {
+                        print("Uploading for \(participantID!)")
+                    } else {
+                        print("No ParticipantID set")
                     }
                 }
+                Button("Clear Upload Settings") {
+                    UploadManager.shared.clearSettings()
+                }
             } else {
-                Button("Select Credential File") {
+                Button("Select Settings File") {
                     let panel = NSOpenPanel()
                     panel.allowsMultipleSelection = false
                     panel.canChooseDirectories = false
@@ -47,7 +63,7 @@ struct UploadView: View {
                         if selectedFile != nil {
                             Task {
                                 do {
-                                    try await readCredentials()
+                                    try await readUploadSettings()
                                     print("Selected Device: \(selectedDevice)")
                                 } catch {
                                     print("Error: \(error.localizedDescription)")
@@ -58,45 +74,13 @@ struct UploadView: View {
                     }
                 }
             }
-        }.onAppear {
-            Task {
-                do {
-                    try await loadCredentials()
-                } catch {
-                    print("Error Loading Credentiasls: \(error.localizedDescription)")
-                }
-            }
         }
     }
     
-    private func readCredentials() async throws {
-        if let fileURL = selectedFile {
-            let storeManager = SecureStoreManager()
-            let credentials = try await storeManager.readAndStore(fileName: fileURL)
-            dbName = credentials.dbName
-            clientId = credentials.clientID
-            dbSecret = credentials.secret
-        }
+    private func readUploadSettings() async throws {
+        try await UploadManager.shared.readUploadSettings(from: selectedFile!)
     }
     
-    private func loadCredentials() async throws {
-        let storeManager = SecureStoreManager()
-        if let credentials = try await storeManager.retrive() {
-            dbName = credentials.dbName
-            clientId = credentials.clientID
-            dbSecret = credentials.secret
-        } else {
-            print("No credentials found")
-        }
-    }
-    
-    private func clearCredentials() async throws {
-        let storeManager = SecureStoreManager()
-        try await storeManager.delete()
-        dbName = nil
-        clientId = nil
-        dbSecret = nil
-    }
 }
 
 #Preview {

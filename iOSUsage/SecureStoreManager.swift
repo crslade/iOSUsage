@@ -10,6 +10,8 @@ import Security
 
 actor SecureStoreManager {
     
+    //MARK: - Secure Storage
+    
     private struct KeyConstants {
         static let server = "dev.slades.iOSUsage.DynoPass"
         static let searchQuery: [String: Any] = [
@@ -81,5 +83,7 @@ actor SecureStoreManager {
         case unexpectedPasswordData
         case unhandledError(status: OSStatus)
     }
+    
+
     
 }
