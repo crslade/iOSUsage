@@ -44,6 +44,13 @@ struct UploadView: View {
                 Button("Upload Data") {
                     if participantID != nil {
                         print("Uploading for \(participantID!)")
+                        Task {
+                            do {
+                                try await UploadManager.shared.uploadData()
+                            } catch {
+                                print("Error Uploading Data: \(error.localizedDescription)")
+                            }
+                        }
                     } else {
                         print("No ParticipantID set")
                     }

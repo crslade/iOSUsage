@@ -41,11 +41,18 @@ actor UploadManager {
         if credentials.count == 1 {
             await setSettings(uploadURI: String(credentials[0]))
         } else if credentials.count == 2 {
-            await setSettings(uploadURI: String(credentials[0]), participantID: String(credentials[0]))
+            await setSettings(uploadURI: String(credentials[1]), participantID: String(credentials[0]))
             print("Credentials Set")
         } else {
             throw UploadManagerError.unexpectedData
         }
+    }
+    
+    func uploadData() async throws {
+        guard let uploadURI = await uploadURI, let participantID = await participantID else {
+            throw UploadManagerError.noData
+        }
+        print("Uploading to \(uploadURI) for \(participantID)")
     }
     
     @MainActor

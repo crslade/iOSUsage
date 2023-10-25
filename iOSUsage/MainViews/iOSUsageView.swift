@@ -13,6 +13,7 @@ struct iOSUsageView: View {
     @Query private var usages: [Usage]
     
     @State private var selectedDevice = "All"
+    @State private var extractionMethod = "Export"
     
     var body: some View {
         VStack {
@@ -26,7 +27,19 @@ struct iOSUsageView: View {
             HStack(alignment: .top) {
                 ScreenTimeUsageView(selectedDevice: selectedDevice)
                 Divider()
-                UploadView(selectedDevice: selectedDevice)
+                VStack {
+                    Picker("", selection: $extractionMethod) {
+                        Text("Export").tag("Export")
+                        Text("Upload").tag("Upload")
+                    }
+                    .pickerStyle(.segmented)
+                    if extractionMethod == "Export" {
+                        ExportView(selectedDevice: selectedDevice)
+                    } else {
+                        UploadView(selectedDevice: selectedDevice)
+                    }
+                }
+
             }
             .layoutPriority(1)
         }
