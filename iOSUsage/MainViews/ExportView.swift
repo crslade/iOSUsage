@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ExportView: View {
+    @Environment(\.modelContext) var context
     
     @State private var participantID: String = ""
     var selectedDevice: String
@@ -28,8 +29,14 @@ struct ExportView: View {
                 if panel.runModal() == .OK {
                     if let url = panel.url {
                         print("Saving to \(url)")
-                        //let exportManager = ExportManager()
-                        //exportManager.exportToCSV(participantID: participantID, selectedDevice: selectedDevice, outputURL: url)
+                        let exportManager = ExportManager(modelContainer: context.container)
+                        Task {
+                            do {
+                                try await exportManager.exportToCSV(participantID: participantID, selectedDevice: selectedDevice, outputURL: url)
+                            } catch {
+                                print("Error: \(error.localizedDescription)")
+                            }
+                        }
                     }
                 }
             }
