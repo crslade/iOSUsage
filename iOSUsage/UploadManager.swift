@@ -6,72 +6,40 @@
 //
 
 import Foundation
+import SwiftData
 
-actor UploadManager {
-    //MARK: - Upload to API
-    static let shared = UploadManager()
+actor UploadManager: ModelActor {
+   
+    let modelContainer: ModelContainer
+    let modelExecutor: any ModelExecutor
     
-    struct DefaultsKeys {
-        static let uploadURIKey = "UploadURIKey"
-        static let participantIDKey = "ParticipantIDKey"
+    private let dateFormatter = DateFormatter()
+    
+    init(modelContainer: ModelContainer) {
+        self.modelContainer = modelContainer
+        let context = ModelContext(modelContainer)
+        modelExecutor = DefaultSerialModelExecutor(modelContext: context)
+        //Date Formatter Init
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone.current
     }
     
-    @MainActor
-    var uploadURI: String? {
-        get {
-            UserDefaults.standard.string(forKey: DefaultsKeys.uploadURIKey)
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: DefaultsKeys.uploadURIKey)
-        }
-    }
-    
-    @MainActor
-    var participantID: String? {
-        get {
-            UserDefaults.standard.string(forKey: DefaultsKeys.participantIDKey)
-        }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: DefaultsKeys.participantIDKey)
-        }
-    }
-    
-    func readUploadSettings(from fileURL: URL) async throws {
+    func readUploadSettings(from fileURL: URL) async throws -> (uploadURL: String, participantID: String?)? {
         let credentials = try String(contentsOf: fileURL, encoding: .utf8).split(separator: /,/)
         if credentials.count == 1 {
-            await setSettings(uploadURI: String(credentials[0]))
+            return (uploadURL: String(credentials[0]), nil)
         } else if credentials.count == 2 {
-            await setSettings(uploadURI: String(credentials[1]), participantID: String(credentials[0]))
-            print("Credentials Set")
+            return (uploadURL: String(credentials[1]), participantID: String(credentials[0]))
         } else {
-            throw UploadManagerError.unexpectedData
+            return nil
         }
     }
     
-    func uploadData() async throws {
-        guard let uploadURI = await uploadURI, let participantID = await participantID else {
-            throw UploadManagerError.noData
-        }
-        print("Uploading to \(uploadURI) for \(participantID)")
+    func uploadData(to uploadURL: URL, with participantID: String) async throws {
+        print("Uploading to \(uploadURL) for \(participantID)")
     }
     
-    @MainActor
-    func clearSettings() {
-        participantID = nil
-        uploadURI = nil
-    }
     
-    @MainActor
-    private func setSettings(uploadURI: String, participantID: String? = nil) {
-        self.uploadURI = uploadURI
-        if participantID != nil {
-            self.participantID = participantID
-        }
-        self.participantID = participantID
-    }
     
-    enum UploadManagerError: Error {
-        case noData
-        case unexpectedData
-    }
+
 }

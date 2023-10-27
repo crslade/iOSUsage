@@ -13,9 +13,9 @@ struct ReadDataView: View {
     @State private var selectedFolder: URL? = nil
     @Binding var selectedDevice: String
     
-    @State var presentingError = false
-    @State var errorMessage = ""
-    @State var errorTitle = ""
+    @State private var presentingError = false
+    @State private var errorMessage = ""
+    @State private var errorTitle = ""
     
     var body: some View {
         VStack {

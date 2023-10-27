@@ -10,82 +10,79 @@ import SwiftData
 
 struct UploadView: View {
     @Environment(\.modelContext) var context
-    @AppStorage(UploadManager.DefaultsKeys.uploadURIKey) var uploadURI: String?
-    @AppStorage(UploadManager.DefaultsKeys.participantIDKey) var participantID: String?
     @Query private var usages: [Usage]
     var selectedDevice: String
     
-    private var credentialsLoaded: Bool { uploadURI != nil }
-    @State private var selectedFile: URL? = nil
+    private var readyForUpload: Bool { uploadURL != nil && uploadURL != "" && participantID != nil && participantID != "" }
+    @State private var settingsFile: URL? = nil
+    @State private var uploadURL: String? = nil
+    @State private var participantID: String? = nil
     
     var participantBinding: Binding<String> {
-            Binding<String>(
-                get: {
-                    return self.participantID ?? ""
-            },
-                set: { newString in
-                    self.participantID = newString
-            })
-        }
+        Binding<String>(
+            get: {
+                return self.participantID ?? ""
+        },
+            set: { newString in
+                self.participantID = newString
+        })
+    }
+    
+    var uploadURLBinding: Binding<String> {
+        Binding<String>(
+            get: {
+                return self.uploadURL ?? ""
+        },
+            set: { newString in
+                self.participantID = newString
+        })
+    }
 
+    @State private var presentingError = false
+    @State private var errorMessage = ""
     
     var body: some View {
         VStack {
-            Text("Upload Database:")
-                .font(.title)
-            if uploadURI != nil {
-                Text("Upload Destination Set")
-                VStack(alignment: .leading) {
-                    Text("ParticipantID:")
-                    TextField("ParticipantID", text: participantBinding)
-                        .textFieldStyle(.roundedBorder)
-                        .layoutPriority(0.5)
-                }
-                Button("Upload Data") {
-                    if participantID != nil {
-                        print("Uploading for \(participantID!)")
+            Button("Select Settings File") {
+                let panel = NSOpenPanel()
+                panel.allowsMultipleSelection = false
+                panel.canChooseDirectories = false
+                if panel.runModal() == .OK {
+                    let url = panel.url
+                    print(url!)
+                    settingsFile = url
+                    if settingsFile != nil {
                         Task {
-                            do {
-                                try await UploadManager.shared.uploadData()
-                            } catch {
-                                print("Error Uploading Data: \(error.localizedDescription)")
+                            let uploadManager = UploadManager(modelContainer: context.container)
+                            if let settings = try? await uploadManager.readUploadSettings(from: settingsFile!) {
+                                uploadURL = settings.uploadURL
+                                participantID = settings.participantID
+                            } else {
+                                print("Error reading settings")
+                                errorMessage = "Wrong file format"
+                                presentingError = true
                             }
                         }
-                    } else {
-                        print("No ParticipantID set")
-                    }
-                }
-                Button("Clear Upload Settings") {
-                    UploadManager.shared.clearSettings()
-                }
-            } else {
-                Button("Select Settings File") {
-                    let panel = NSOpenPanel()
-                    panel.allowsMultipleSelection = false
-                    panel.canChooseDirectories = false
-                    if panel.runModal() == .OK {
-                        let url = panel.url
-                        print(url!)
-                        selectedFile = url
-                        if selectedFile != nil {
-                            Task {
-                                do {
-                                    try await readUploadSettings()
-                                    print("Selected Device: \(selectedDevice)")
-                                } catch {
-                                    print("Error: \(error.localizedDescription)")
-                                }
-                            }
-                        }
-                        
                     }
                 }
             }
+            HStack {
+                Text("Upload URL:")
+                TextField("https://example.com", text: uploadURLBinding)
+                    .textFieldStyle(.roundedBorder)
+            }
+            HStack {
+                Text("Participant ID:")
+                TextField("1", text: participantBinding)
+                    .textFieldStyle(.roundedBorder)
+            }
+            Button("Upload Data") {
+                print("Will Upload Data")
+            }.disabled(!readyForUpload)
         }
-    }
-    
-    private func readUploadSettings() async throws {
-        try await UploadManager.shared.readUploadSettings(from: selectedFile!)
+        .alert(isPresented: $presentingError) {
+            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+        }
     }
     
 }
