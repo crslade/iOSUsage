@@ -34,12 +34,14 @@ struct UploadView: View {
                 return self.uploadURL ?? ""
         },
             set: { newString in
-                self.participantID = newString
+                self.uploadURL = newString
         })
     }
 
     @State private var presentingError = false
     @State private var errorMessage = ""
+    @State private var errorTitle = ""
+    @State private var uploading = false
     
     var body: some View {
         VStack {
@@ -59,7 +61,7 @@ struct UploadView: View {
                                 participantID = settings.participantID
                             } else {
                                 print("Error reading settings")
-                                errorMessage = "Wrong file format"
+                                errorMessage = "Wrong file format."
                                 presentingError = true
                             }
                         }
@@ -77,11 +79,29 @@ struct UploadView: View {
                     .textFieldStyle(.roundedBorder)
             }
             Button("Upload Data") {
-                print("Will Upload Data")
+                let uploadManager = UploadManager(modelContainer: context.container)
+                uploading = true
+                Task {
+                    do {
+                        try await uploadManager.upload(to: uploadURL!, participantID: participantID!, selectedDevice: selectedDevice)
+                        errorTitle = "Upload Successful!"
+                        errorMessage = ""
+                        presentingError = true
+                        uploading = false
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                        errorMessage = error.localizedDescription
+                        presentingError = true
+                        uploading = false
+                    }
+                }
             }.disabled(!readyForUpload)
+            if uploading {
+                ProgressView()
+            }
         }
         .alert(isPresented: $presentingError) {
-            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+            Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
         }
     }
     

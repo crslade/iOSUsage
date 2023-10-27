@@ -56,4 +56,17 @@ final class Usage {
             return "Missing"
         }
     }
+    
+    func toDictionary(using formatter: DateFormatter, with participantID: String) -> [String: String] {
+        let formattedStartTime = self.startTime != nil ? formatter.string(from: self.startTime!) : "None"
+        let formattedEndTime = self.endTime != nil ? formatter.string(from: self.endTime!) : "None"
+        var dict = [String: String]()
+        dict["participantID"] = participantID
+        dict["startTime"] = formattedStartTime
+        dict["endTime"] = formattedEndTime
+        dict["totalTime"] = totalTimeStr
+        dict["appName"] = appName
+        dict["device"] = device
+        return dict
+    }
 }
