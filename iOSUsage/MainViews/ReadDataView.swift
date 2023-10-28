@@ -17,6 +17,8 @@ struct ReadDataView: View {
     @State private var errorMessage = ""
     @State private var errorTitle = ""
     
+    @State private var reading = false
+    
     var body: some View {
         VStack {
             Text("Select KnowledgeC Folder:")
@@ -33,14 +35,17 @@ struct ReadDataView: View {
                         if selectedFolder != nil {
                             print("Reading data from: \(url!)")
                             let readerActor = UsageReader(modelContainer: context.container)
+                            reading = true
                             Task {
                                 do {
                                     try await readData(into: readerActor)
+                                    reading = false
                                 } catch {
                                     print(error.localizedDescription)
                                     errorTitle="Error"
                                     errorMessage = error.localizedDescription
                                     presentingError = true
+                                    reading = false
                                 }
                             }
                         }
@@ -62,6 +67,9 @@ struct ReadDataView: View {
                             presentingError = true
                         }
                     }
+                }
+                if reading {
+                    ProgressView()
                 }
             }
         }

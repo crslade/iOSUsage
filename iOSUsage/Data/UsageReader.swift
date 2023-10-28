@@ -71,7 +71,7 @@ actor UsageReader: ModelActor {
                 modelContext.insert(newUsage)
             }
         }
-        //try modelContext.save()
+        try modelContext.save()
     }
     
     func clearData() async throws {
