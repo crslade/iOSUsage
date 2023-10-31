@@ -9,7 +9,7 @@ import SwiftData
 
 struct ScreenTimeUsageView: View {
     @Environment(\.modelContext) var context
-    @Query private var usages: [Usage]
+    @Query(sort: \Usage.startTime) private var usages: [Usage]
     var selectedDevice: String
     
     var body: some View {
