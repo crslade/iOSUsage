@@ -6,7 +6,7 @@
 
 ## Installation
 
-Download the DMG from the releases, then drag `iOSUsage` to your application folder.
+Download the DMG from [GitHub](https://github.com/crslade/iOSUsage/releases), then drag `iOSUsage` to your application folder.
 
 ## Recommended Usage
 
