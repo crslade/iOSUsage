@@ -44,7 +44,7 @@ On the Mac, go to Settings -> Screen Time -> App & Website Activity. Wait a litt
 
 ### 4. Copy the Screen Time database to a separate folder
 
-After the Data has Synced, copy the Screen Time Database from `/Users/Account/Library/Application Support/Knowledge` to a folder on the Desktop or Documents. 
+After the Data has Synced, copy the Screen Time Database from `/Users/<account>/Library/Application Support/Knowledge` to a folder on the Desktop or Documents. 
 
 To find the folder, you must show hidden files: with the Finder as the active window, press `Shift-CMD-.` (period). From the user's home folder, you will see a Library folder. From that go to `Application Support` -> `Knowledge`. Right-click on Knowledge.db and select copy. Create a destination folder on the desktop/documents. Then inside this folder, right-click, and paste.
 
