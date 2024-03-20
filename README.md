@@ -12,6 +12,20 @@ Download the DMG from [GitHub](https://github.com/crslade/iOSUsage/releases), th
 
 Please remember the privacy of your participants and do all you can to ensure their privacy.
 
+1. Improve Synchronization:
+
+    Consistent Internet Connection: Ensure that both devices are connected to the same Wi-Fi network during the syncing process. This can help to avoid discrepancies caused by different internet connections.
+
+    Device Usage: Try to avoid using the devices during the syncing process. To efficiently complete synchronization requires the device to remain unused until syncing completes.
+
+    Regular Syncing: Schedule regular syncing processes. The more frequent the sync, the less data there is to transfer each time, which could lead to faster and more successful syncs.
+
+2. Prevent Data Loss:
+
+    Avoid Deleting Apps: Application deletions and reinstalls may affect screen time data for specific apps. Try to avoid deleting apps that you want to track usage for.
+
+    Longer Sync Duration: If data is missing, try a longer sync duration. Longer sync durations may help recover missing data.
+
 ### 1. Login to the device with an Apple ID and Enable ScreenTime
 
 If not already done, make sure the iPhone or iPad is logged in to an iCloud account with an Apple ID. Then go to Settings -> Screen Time and make sure it is enabled. Also, make sure "Share Across Devices" is enabled.
